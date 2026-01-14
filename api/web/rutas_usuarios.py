@@ -34,13 +34,12 @@ def login():
     if (content_type == 'application/json'):
         # Leemos el JSON enviado
         login_json = request.json
-
-        # Extraemos usuario y contraseña
-        username = login_json['username']
+        # Extraemos email y contraseña
+        email = login_json['email']
         password = login_json['password']
-
+      
         # Llamamos a la función de login del controlador
-        respuesta, code = controlador_usuarios.login_usuario(username, password)
+        respuesta,code= controlador_usuarios.login_usuario(email,password)
     else:
         # Si no es JSON, devolvemos error
         respuesta = {"status": "Bad request"}
@@ -62,14 +61,13 @@ def registro():
     if (content_type == 'application/json'):
         # Leemos los datos enviados en formato JSON
         login_json = request.json
-
         # Extraemos los datos del usuario
-        username = login_json['username']
+        email = login_json['email']
         password = login_json['password']
-        profile = login_json['profile']
-
+        name = login_json['name']
+        
         # Llamamos al controlador para dar de alta al usuario
-        respuesta, code = controlador_usuarios.alta_usuario(username, password, profile)
+        respuesta,code= controlador_usuarios.alta_usuario(email,password,name)
     else:
         respuesta = {"status": "Bad request"}
         code = 401

@@ -20,20 +20,17 @@ def login_usuario(username, password):
         # Creamos un cursor para ejecutar consultas
         with conexion.cursor() as cursor:
             # Consulta SQL para comprobar usuario y contraseña
-            cursor.execute(
-                "SELECT perfil FROM usuarios WHERE usuario = %s AND clave = %s",
-                (username, password)
-            )
-
+            cursor.execute("SELECT name FROM usuarios WHERE email = '" + email +"' and password= '" + password + "'")
+            
             # Obtenemos el resultado
-            usuario = cursor.fetchone()
-
+            email = cursor.fetchone()
+            
             # Si no existe el usuario
-            if usuario is None:
-                ret = {"status": "ERROR", "mensaje": "Usuario/clave erroneo"}
+            if email is None:
+                ret = {"status": "ERROR","mensaje":"Usuario/password erroneo" }
             else:
                 # Guardamos el usuario en la sesión
-                session["usuario"] = username
+                session["email"] = email
 
                 # Login correcto
                 ret = {"status": "OK"}
@@ -59,20 +56,14 @@ def alta_usuario(username, password, perfil):
 
         with conexion.cursor() as cursor:
             # Comprobamos si el usuario ya existe
-            cursor.execute(
-                "SELECT perfil FROM usuarios WHERE usuario = %s",
-                (username,)
-            )
-            usuario = cursor.fetchone()
-
+            cursor.execute("SELECT name FROM usuarios WHERE email = %s",(email,))
+            email = cursor.fetchone()
+      
             # Si el usuario no existe
-            if usuario is None:
+            if email is None:
                 # Insertamos el nuevo usuario
-                cursor.execute(
-                    "INSERT INTO usuarios(usuario,clave,perfil) "
-                    "VALUES('" + username + "','" + password + "','" + perfil + "')"
-                )
-
+                cursor.execute("INSERT INTO usuarios(email,password,name) VALUES('"+ email +"','"+  password+"','"+ name+"')")
+                
                 # Comprobamos si se insertó correctamente
                 if cursor.rowcount == 1:
                     conexion.commit()
