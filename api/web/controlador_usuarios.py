@@ -21,6 +21,7 @@ def login_usuario(username,password):
         code=500
     return ret,code
 
+
 def alta_usuario(username,password,perfil):
     try:
         conexion = obtener_conexion()
