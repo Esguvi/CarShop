@@ -34,6 +34,8 @@ services:
       MYSQL_PASSWORD: grupo2a
     volumes:
       - mariadb-dataa2:/var/lib/mysql
+      - ./Coches.sql:/docker-entrypoint-initdb.d/Coches.sql
+
 
   phpmyadmin:
     image: phpmyadmin:5.2
