@@ -1,6 +1,11 @@
 from flask import Flask, jsonify
 import os
 
+
+# Importar y cargar las variables de entorno
+from variables import cargarvariables
+cargarvariables()
+
 # Importamos los blueprints de cada módulo
 from rutas_usuarios import bp as usuarios_bp
 from rutas_coches import bp as coches_bp

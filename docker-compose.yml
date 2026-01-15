@@ -19,6 +19,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=8080
+      - DB_DATABASE=ciber
     depends_on:
       - mariadb
 
@@ -28,7 +29,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: carshop
+      MYSQL_DATABASE: ciber
       MYSQL_USER: grupo2a
       MYSQL_PASSWORD: grupo2a
     volumes:
