@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apache-waf
-  namespace: ciber2a
+  namespace: grupoa2
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: apache
-        - ports:
+          ports:
             - containerPort: 80
           image: victoralejos/apache:1.0
 
@@ -24,7 +24,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: apache-waf
-  namespace: ciber2a
+  namespace: grupoa2
 spec:
   type: NodePort
   ports:
